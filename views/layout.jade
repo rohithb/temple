@@ -1,7 +1,56 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	head
+		//- Standard Meta
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+
+		//-Site Properties
+		title Temple #{title}
+
+		link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700', rel='stylesheet', type='text/css')
+		link(rel='stylesheet', type='text/css', href='/semantic/css/semantic.css')
+
+		script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js')
+		script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.js')
+		script(src='/semantic/javascript/semantic.js')
+
+		link(rel='stylesheet', type='text/css', href='/stylesheets/feed.css')
+		script(src="/javascripts/feed.js")
+	body#feed
+		//-Sidebar
+		.ui.large.inverted.vertical.sidebar.menu
+			a.active.item
+				|Dogs Weekly
+				span.ui.label 213
+			a.item
+				|Joystiq
+				span.ui.label 113
+			.item
+				b Archived Feeds
+				.menu
+					a.item
+						|Engadget
+						span.ui.label 11
+					a.item
+						|NY Times Tech Blog
+						span.ui.label 21
+			a.item
+				i.bookmark icon
+				|Favorites
+			.ui.dropdown.item
+				i.add.icon
+				|New
+				.menu
+					a.item
+						i.rss.icon
+						|Feed
+					a.item
+						i.tag.icon
+						|Tag
+					a.item
+						i.folder.icon
+						|Group
+		.ui.celled.grid
+			block content
