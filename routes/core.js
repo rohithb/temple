@@ -2,9 +2,6 @@
 /*
  * Routes related with managing repos.
  */
-
-var git = require('nodegit');
-
 exports.managePosts = function(req, res){
-
+  res.render('manage-posts',{ title: 'Manage Posts' });
 };

@@ -1,0 +1,41 @@
+doctype html
+html
+	head
+	block header
+		
+	body#feed
+		//-Sidebar
+		.ui.thin.inverted.vertical.sidebar.menu
+			a.active.item
+				|Dogs Weekly
+				span.ui.label 213
+			a.item
+				|Joystiq
+				span.ui.label 113
+			.item
+				b Archived Feeds
+				.menu
+					a.item
+						|Engadget
+						span.ui.label 11
+					a.item
+						|NY Times Tech Blog
+						span.ui.label 21
+			a.item
+				i.bookmark icon
+				|Favorites
+			.ui.dropdown.item
+				i.add.icon
+				|New
+				.menu
+					a.item
+						i.rss.icon
+						|Feed
+					a.item
+						i.tag.icon
+						|Tag
+					a.item
+						i.folder.icon
+						|Group
+		.ui.celled.grid
+			block content

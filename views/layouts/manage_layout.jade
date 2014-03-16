@@ -1,13 +1,15 @@
 extends layout
+block header
+	include ../includes/manage_post_head
 
 block content
 	.seven.wide.middle.column
 		.ui.right.floated.black.launch.button
 			i.list.layout.icon
-			|Menu
+			|&nbsp;Menu
 		h2.ui.header
 			i.inbox.icon
-			|Inbox
+			|&nbsp;Inbox
 		block sevenCol
 	.nine.wide.right.column
 		block nineCol

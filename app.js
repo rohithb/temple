@@ -2,7 +2,7 @@
 /**
  * Module dependencies.
  */
-
+require('newrelic');  
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -37,11 +37,10 @@ if ('development' == app.get('env')) {
 
 // Mappings
 app.get('/', routes.index);
-app.get('/helloworld',routes.helloworld);
 app.get('/userlist',routes.userlist(db));
 
 app.get('/manage-posts',core.managePosts);
-app.get('/user-init',user.initUser);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

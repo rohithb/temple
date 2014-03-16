@@ -84,6 +84,10 @@ body {
   padding: 1em 2em;
   background-color: #FAFAFA;
 }
+#feed .ui.divided.inbox.selection.list.tab {
+  height: 84%;
+  overflow-y: auto;
+}
 
 /*******************************
           Responsive

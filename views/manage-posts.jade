@@ -1,29 +1,117 @@
-extends manage_layout
+extends layouts/manage_layout
 
 block sevenCol
-  |Test 3
-
+  .ui.tabular.filter.menu
+    a.active.item(data-tab='published') Published
+    a.item(data-tab='draft') Draft
+  .ui.divided.inbox.selection.list.active.tab(data-tab='published')
+    a.active.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 14, 2013
+      .description Weekly Webcomic Wrapup fought the law, and the law won
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 14, 2013
+      .description Scientists discover new breed of dog
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 14, 2013
+      .description Scientists discover new breed of dog
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 14, 2013
+      .description Scientists discover new breed of dog
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 14, 2013
+      .description Scientists discover new breed of dog
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 14, 2013
+      .description Scientists discover new breed of dog
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 14, 2013
+      .description Scientists discover new breed of dog
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 10, 2013
+      .description Dogs colony in Antarctica
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 09, 2013
+      .description Famous dog whisperer Chakotay dies today at 104
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 09, 2013
+      .description Famous dog whisperer Chakotay dies today at 104
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 07, 2013
+      .description Top 10 Things to Know about Labradoodles
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 05, 2013
+      .description Study shows children enjoy the company of animals
+  .ui.divided.inbox.selection.list.tab(data-tab='draft')
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 14, 2013
+      .description Your favorite saved article
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 14, 2013
+      .description Your favorite saved article
+    a.item
+      .left.floated.ui.star.rating
+        i.icon
+      .right.floated.date Sep 14, 2013
+      .description Your favorite saved article
+  .ui.divider
+  
+        
 block nineCol
   h1.ui.header Weekly Webcomic Wrapup fought the law, and the law won
-  |Tags: 
-  a.ui.teal.label Unread
-  |&nbsp;
-  a.ui.teal.label Comics
-  p.
-    So there's this video game coming out Tuesday called Grand Theft Auto 5. 
-    Don't know if you've heard of it. Anyways, it's all about crime and gangs and some roughneck
-    ne'er-do-wells, so I thought this would be the perfect time to talk about times when 
-    we've been... well, less than perfect.
-  p.
-    hen I was a young'un, I was a frequent visitor to the local swimming pool.
-    I was also a frequent lover of AirHeads candy, which the pool happened to sell.
-    Waiting, watching, stalking the counter like a big cat in the savannah,
-    I waited for the perfect opportunity to strike. While the lifeguards were busy,
-    I snuck through the gate, reached up and took both cherry and "mystery white"
-    AirHeads. I quickly ran out to the sidewalk and reveled in my sweet, delicious victory... 
-    for all of ten seconds, before I felt guilty enough to sneak back in and return the .
-    20 worth of candy I had stolen.
-  .ui.divider
-  .ui.basic.button Save
-  |&nbsp;
-  .ui.basic.button Delete
+  .ui.clearing.divider
+  .ui.editor.controls
+    .ui.left.control.block
+      i.large.upload.icon.control.btn
+      i.large.open.folder.icon
+      i.large.photo.icon
+      i#showPreview.large.unhide.icon
+      i.large.fullscreen.icon
+    .ui.right.control.block
+      a.ui.small.red.button Discard
+      |&nbsp;
+      a.ui.small.teal.button Save
+      |&nbsp;
+      a.ui.small.teal.button Publish
+  #editor.ui
+    textarea#text-input.ui
+      | This is a **Markdown** test.
+    #preview.ui  
+  script(src='/lib/markdown.js')
+  script.
+    var j = jQuery.noConflict();   
+    var editor = new Editor('text-input','preview','showPreview');
+    
+    j(document).on('click', '#showPreview.unhide', function() {
+      editor.showPreview();
+    });
+    j(document).on('click', '#showPreview.hide', function() {
+      editor.hidePreview();
+    });
