@@ -10,8 +10,10 @@
     "jade": "*",
     "less-middleware": "*",
     "mongodb": "*",
-    "monk": "*",
-    "nodegit": "*"
+    "mongoose": "3.8.8",
+    "nodegit": "*",
+    "passport": "*",
+    "passport-github" : "*"
   },
   "devDependencies": {
     "nodemon" : "*",
