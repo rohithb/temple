@@ -11,7 +11,7 @@ var error = require('./error_handler');
  */
 exports.initialize = function(req, res, next){
 	var username = req.user.username; // hardcoded value
-	UserInfo.findOne({'username' : username},function(err,userInfo){
+	UserInfo.findOne({'username' : username},'is_initialized',function(err,userInfo){
 		if(err)
 			return error.handle(444,'Sorry , Database Error', 'Please try this after some time',next);
 		if(!userInfo)
@@ -49,7 +49,7 @@ exports.signUp = function(req, res, next){
 	var username = req.user.username;
 	var full_name = req.user._json.name;
 	var email = req.user._json.email;
-	UserInfo.findOne({'username' : username},function(err,user){
+	UserInfo.findOne({'username' : username}, 'is_initialized',function(err,user){
 		if(err)
 			return error.handle(445,'Sorry , Database Error', 'Please try this after some time',next);
 		if(!user){
@@ -65,6 +65,8 @@ exports.signUp = function(req, res, next){
 			});
 			res.redirect('/initialize');
 		}
+		else if(user.is_initialized == false)
+			res.redirect('/initialize');
 		else
 			res.redirect('/manage-pages');
 	});	

@@ -88,6 +88,10 @@ body {
   height: 84%;
   overflow-y: auto;
 }
+.ui.clear.left{
+  clear : left;
+}
+
 
 /*******************************
           Responsive

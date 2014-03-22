@@ -1,117 +1,119 @@
 extends layouts/manage_layout
-
 block sevenCol
   .ui.tabular.filter.menu
     a.active.item(data-tab='published') Published
     a.item(data-tab='draft') Draft
-  .ui.divided.inbox.selection.list.active.tab(data-tab='published')
-    a.active.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 14, 2013
-      .description Weekly Webcomic Wrapup fought the law, and the law won
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 14, 2013
-      .description Scientists discover new breed of dog
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 14, 2013
-      .description Scientists discover new breed of dog
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 14, 2013
-      .description Scientists discover new breed of dog
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 14, 2013
-      .description Scientists discover new breed of dog
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 14, 2013
-      .description Scientists discover new breed of dog
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 14, 2013
-      .description Scientists discover new breed of dog
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 10, 2013
-      .description Dogs colony in Antarctica
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 09, 2013
-      .description Famous dog whisperer Chakotay dies today at 104
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 09, 2013
-      .description Famous dog whisperer Chakotay dies today at 104
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 07, 2013
-      .description Top 10 Things to Know about Labradoodles
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 05, 2013
-      .description Study shows children enjoy the company of animals
-  .ui.divided.inbox.selection.list.tab(data-tab='draft')
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 14, 2013
-      .description Your favorite saved article
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 14, 2013
-      .description Your favorite saved article
-    a.item
-      .left.floated.ui.star.rating
-        i.icon
-      .right.floated.date Sep 14, 2013
-      .description Your favorite saved article
+  .ui.divided.inbox.selection.list.tab.published(data-tab='published')
+    each page in pages
+      if page.published
+        a.item.pageref(id='#{page._id}')
+          .left.floated.ui.star.rating
+            i.icon
+          .right.floated.date #{month[page.date.getMonth()]+ ' ' + page.date.getDate()+ ', '+page.date.getFullYear()}
+          .description #{page.title}
+  .ui.divided.inbox.selection.list.tab.draft(data-tab='draft')
+   each page in pages
+      if !page.published
+        a.item.pageref(id='#{page._id}')
+          .left.floated.ui.star.rating
+            i.icon
+          .right.floated.date #{month[page.date.getMonth()]+ ' ' + page.date.getDate()+ ', '+page.date.getFullYear()}
+          .description #{page.title}
   .ui.divider
-  
-        
+  .ui.small.basic.confirm.unsaved.modal
+    .header Unsaved Changes
+    .content
+      .left
+        i.save.icon
+      .right
+        |Are you sure? All unsaved changes will be lost.
+    .actions
+      .ui.button.negative.teal Cancel
+      .ui.button.positive.red Confirm
+       
 block nineCol
-  h1.ui.header Weekly Webcomic Wrapup fought the law, and the law won
-  .ui.clearing.divider
-  .ui.editor.controls
-    .ui.left.control.block
-      i.large.upload.icon.control.btn
-      i.large.open.folder.icon
-      i.large.photo.icon
-      i#showPreview.large.unhide.icon
-      i.large.fullscreen.icon
-    .ui.right.control.block
-      a.ui.small.red.button Discard
-      |&nbsp;
-      a.ui.small.teal.button Save
-      |&nbsp;
-      a.ui.small.teal.button Publish
-  #editor.ui
-    textarea#text-input.ui
-      | This is a **Markdown** test.
-    #preview.ui  
-  script(src='/lib/markdown.js')
+    .ui.inverted.dimmer
+      .ui.large.text.loader Loading
+    .ui#editor
+      h1#title.ui.header(contentEditable = true) 
+      .ui.clearing.divider
+      .ui.editor.controls
+        .ui.left.control.block
+          i.large.upload.icon.control.btn(title="Upload")
+          i.large.open.folder.icon(title="Files")
+          i.large.photo.icon(title="Images")
+          i#showPreview.large.unhide.icon(title="Preview")
+          i.large.fullscreen.icon(title="Expand Editor")
+        .ui.right.control.block
+          a.ui.small.red.button#discard Discard
+          |&nbsp;
+          a.ui.small.teal.button#save Save
+          |&nbsp;
+          a.ui.small.teal.button#publish Publish
+      .editor.ui
+        textarea#text-input.ui(placeholder =" **Markdown** goes here... ")
+        #preview.ui  
+      script(src='/lib/markdown.js')
+
+block script
   script.
     var j = jQuery.noConflict();   
     var editor = new Editor('text-input','preview','showPreview');
-    
+    j(document).ready(function(){
+      j('#editor').hide();
+    });
     j(document).on('click', '#showPreview.unhide', function() {
       editor.showPreview();
     });
     j(document).on('click', '#showPreview.hide', function() {
       editor.hidePreview();
+    });
+    //Add new Button action
+    j(document).on('click', '.button.add.new', function(){
+      if(j('#editor').is(':hidden')){
+        j('#editor').show();
+        j('#editor').attr('page_id', 'new');
+        j('#title').html('');
+        j('#text-input').val('');
+      }
+      var len = j('#text-input').val().length | j('#title').html().length | 0;
+      if(len!=0){
+        j('.small.confirm.unsaved.modal').modal('setting', {
+          closable  : false,
+          onDeny    : function(){},
+          onApprove : function() {
+            j('#editor').show();
+            j('#editor').attr('page_id', 'new');
+            j('#title').html('');
+            j('#text-input').val('');
+          }
+      }).modal('show');
+      }
+    });
+    // Save function
+    j(document).on('click','#save',function(){
+
+      editor.save(j('#editor').attr('page_id'));
+    });
+
+    j(document).on('click', 'a.item.pageref', function(){
+      var id = j(this).attr('id');
+      j('.inverted.dimmer').addClass('active');
+      j.ajax({
+        url : '/page/load/'+id,
+        type : 'GET',
+        dataType : 'json',
+        success : function(data){
+          j('.inverted.dimmer').removeClass('active');
+          j('#editor').show();
+          j('#editor').attr('page_id', data._id);
+          j('#title').html(data.title);
+          j('#text-input').val(data.content);
+        },
+        error : function(err){
+          alert('Something went terribly wrong !! Please try again...');
+          j('.inverted.dimmer').removeClass('active');
+        }
+
+       });
     });
