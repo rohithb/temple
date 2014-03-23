@@ -24,6 +24,7 @@ var Page = new Schema({
 	published : Boolean,
 	date : Date,
 	parent : {type: String, default :'no_parent'},
+	order : {type : Number, default : 0},
 	tags : [Tag]
 });
 

@@ -72,3 +72,37 @@ exports.pageLoad = function(req, res, next){
 		res.send(user.pages[0]);
 	});
 };
+
+exports.pagePublish = function(req, res, next){
+	var username = req.user.username;
+	var id = req.params.id;
+	var action = req.params.publish;   // action = publish or unpublish
+	if(action =='publish')
+		action = true;
+	else if(action == 'unpublish')
+		action = false;
+	UserInfo.update({'username' : username, 'pages._id' : id}, {$set:{'pages.$.published' : action}},
+	 function(err){
+			if(err)
+				return error.handle(444,'Could not save the page.','Some database error.', next);
+			res.send({'status' : true});
+		});
+	
+};
+
+exports.pageSaveAttr = function(req, res, next){
+	var username = req.user.username;
+	var id = req.query.id;
+	var parent = req.query.parent_id;
+	var order = req.query.order;
+	UserInfo.update({'username' : username, 'pages._id' : id},{
+		$set:{
+			'pages.$.parent' : parent,
+			'pages.$.order' : order
+		}},function(err){
+			if(err)
+				return error.handle(444,'Could not save the page.','Some database error.', next);
+			res.send({'status' : true});
+		});
+	
+};

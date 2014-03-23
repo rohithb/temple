@@ -6,7 +6,7 @@ function Editor(input, preview, preview_btn){
 	this.preview = preview;
 	this.preview_btn = preview_btn;
 
-	// j("#"+this.preview).hide();
+	
 	
 	Editor.prototype.showPreview = function (){
 		var input_md = j('#'+this.input).val();
@@ -27,7 +27,7 @@ function Editor(input, preview, preview_btn){
 		j("#"+this.preview_btn).addClass("unhide")
 		//j("#hidePreview").attr("id","showPreview");
 	};
-
+	// Saving the page/post
 	Editor.prototype.save = function(id){
 		var title = j('#title').html();
 		var content = j('#text-input').val();
@@ -57,6 +57,32 @@ function Editor(input, preview, preview_btn){
 			},
 			error : function(err){
 				j('#save').removeClass('loading');
+				alert('Something went terribly wrong !! Please try again...');
+			}
+		});
+	};
+// setting published or not published
+	Editor.prototype.setStatus = function(id , status){
+		j('#publish').addClass('loading');
+		j.ajax({
+			url : '/page/'+status+'/'+id,
+			type : 'GET',
+			success : function(data){
+				j('#publish').removeClass('loading');
+				if(status == 'publish'){
+					j('#publish').html('Unpublish');
+					j('#publish').addClass('red').removeClass('teal');
+					j('#publish').attr('id','unpublish');
+					j('a.item.pageref#'+id).prependTo('.published');
+				}else if(status == 'unpublish'){
+					j('#unpublish').html('Publish');
+					j('#unpublish').addClass('teal').removeClass('red');
+					j('#unpublish').attr('id','publish');
+					j('a.item.pageref#'+id).prependTo('.draft');
+				}
+			},
+			error : function(err){
+				j('#publish').removeClass('loading');
 				alert('Something went terribly wrong !! Please try again...');
 			}
 		});

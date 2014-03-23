@@ -81,9 +81,11 @@ app.get('/logout', function(req, res){
 
 app.get('/', routes.index);
 app.get('/initialize', loggedIn, user.initialize);
-app.get('/manage-pages', loggedIn, core.managePages);
+app.get('/page/manage', loggedIn, core.managePages);
 app.put('/page/save-or-update',loggedIn, core.pageSaveOrUpdate);
 app.get('/page/load/:id', loggedIn, core.pageLoad);
+app.get('/page/:publish/:id', loggedIn, core.pagePublish);
+app.get('/page/save-attribute', loggedIn, core.pageSaveAttr);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
