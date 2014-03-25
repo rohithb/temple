@@ -1,20 +1,34 @@
 //- Standard Meta
-meta(charset="utf-8")
-meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
-meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+meta(charset='utf-8')
+meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0')
 
 //-Site Properties
 title Temple #{title}
 
 link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700', rel='stylesheet', type='text/css')
 link(rel='stylesheet', type='text/css', href='/semantic/css/semantic.css')
-link(rel='stylesheet',type='text/css', href='/stylesheets/editor.css')
 
 script(src='/javascripts/jquery.js')
 script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.js')
 script(src='/semantic/javascript/semantic.js')
 script(src='/javascripts/editor.js')
+//-MarkDown Editor
+link(rel='stylesheet' href='/uikit/css/uikit.css')
+script(src='/uikit/js/uikit.min.js')
+//-Codemirror and marked dependencies 
+link(rel='stylesheet', href='/uikit/codemirror/lib/codemirror.css')
+script(src='/uikit/codemirror/lib/codemirror.js')
+script(src='/uikit/codemirror/mode/markdown/markdown.js')
+script(src='/uikit/codemirror/addon/mode/overlay.js')
+script(src='/uikit/codemirror/mode/xml/xml.js')
+script(src='/uikit/codemirror/mode/gfm/gfm.js')
+script(src='/uikit/marked.js')
+//- Markdown Area JavaScript and CSS 
+script(src='/uikit/markdownarea/markdownarea.js')
+link(rel='stylesheet', href='/uikit/markdownarea/markdownarea.css')
+
 
 link(rel='stylesheet', type='text/css', href='/stylesheets/feed.css')
 
-script(src="/javascripts/feed.js")
+script(src='/javascripts/feed.js')

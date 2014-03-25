@@ -8,7 +8,9 @@ var express = require('express');
 var routes = require('./routes');
 var error = require('./error');
 var user = require('./routes/user');
-var core = require('./routes/core');
+var page = require('./routes/page');
+var post = require('./routes/post');
+var settings = require('./routes/settings');
 var http = require('http');
 var path = require('path');
 var passport = require('passport');
@@ -81,11 +83,23 @@ app.get('/logout', function(req, res){
 
 app.get('/', routes.index);
 app.get('/initialize', loggedIn, user.initialize);
-app.get('/page/manage', loggedIn, core.managePages);
-app.put('/page/save-or-update',loggedIn, core.pageSaveOrUpdate);
-app.get('/page/load/:id', loggedIn, core.pageLoad);
-app.get('/page/:publish/:id', loggedIn, core.pagePublish);
-app.get('/page/save-attribute', loggedIn, core.pageSaveAttr);
+// Page Routes
+app.get('/page/manage', loggedIn, page.manage);
+app.put('/page/save-or-update',loggedIn, page.saveOrUpdate);
+app.get('/page/load/:id', loggedIn, page.load);
+app.get('/page/:publish/:id', loggedIn, page.publish);
+app.get('/page/save-attribute', loggedIn, page.saveAttr); // can be used in menu editor
+
+//Post Routes
+app.get('/post/manage', loggedIn, post.manage);
+app.put('/post/save-or-update',loggedIn, post.saveOrUpdate);
+app.get('/post/load/:id', loggedIn, post.load);
+app.get('/post/:publish/:id', loggedIn, post.publish);
+app.get('/post/save-attribute', loggedIn, post.saveAttr);
+
+//settings
+app.get('/settings/general', loggedIn, settings.general.get);
+app.post('/settings/general', loggedIn, settings.general.post);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

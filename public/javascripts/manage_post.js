@@ -20,7 +20,7 @@ j(document).ready(function(){
 j(document).on('click', '.button.add.new', function(){
   if(j('#editor').is(':hidden')){
     j('#editor').show();
-    j('#editor').attr('page_id', 'new');
+    j('#editor').attr('post_id', 'new');
     j('#title').html('');
     doc.setValue('');
   }
@@ -31,7 +31,7 @@ j(document).on('click', '.button.add.new', function(){
       onDeny    : function(){},
       onApprove : function() {
         j('#editor').show();
-        j('#editor').attr('page_id', 'new');
+        j('#editor').attr('post_id', 'new');
         j('#title').html('');
         doc.setValue('');
       }
@@ -41,7 +41,7 @@ j(document).on('click', '.button.add.new', function(){
 
 // Save function
 j(document).on('click','#save',function(){
-  editorFuncs.savePage(j('#editor').attr('page_id'));
+  editorFuncs.savePost(j('#editor').attr('post_id'));
   j('#save').addClass('disabled');
 });
 
@@ -51,13 +51,13 @@ j(document).on('click', 'a.item.pageref', function(){
   var this_element = j(this);
   j('.inverted.dimmer').addClass('active');
   j.ajax({
-    url : '/page/load/'+id,
+    url : '/post/load/'+id,
     type : 'GET',
     dataType : 'json',
     success : function(data){
       j('.inverted.dimmer').removeClass('active');
       j('#editor').show();
-      j('#editor').attr('page_id', data._id);
+      j('#editor').attr('post_id', data._id);
       j('#title').html(data.title);
       doc.setValue(data.content);
       j('a.item.pageref.active').removeClass('active');
@@ -83,27 +83,7 @@ j(document).on('click', 'a.item.pageref', function(){
 //Publish Action
 j(document).on('click', '#publish, #unpublish', function(){
   var status = j(this).attr('id');
-  var id = j('#editor').attr('page_id');
-  editorFuncs.setStatusPage(id, status);
+  var id = j('#editor').attr('post_id');
+  editorFuncs.setStatusPost(id, status);
 })
 
-//Setting Page Attributes
-j('#pageAttr').on('click',function(){
-    j('.pageAttr.modal').modal('setting', {
-      closable  : false,
-      onDeny    : function(){},
-      onApprove : function() {
-        var order = j('#order').val() | 0;
-        var parent_id = j('#parent').val();
-        var id = j('#editor').attr('page_id');
-        j.ajax({
-          url : '/page/save-attribute',
-          type : 'GET',
-          data : {id : id, order : order, parent_id : parent_id},
-          error : function(err){
-            alert('Sorry. Something unexpected occured..');
-          }
-        });
-      }
-  }).modal('show');
-})

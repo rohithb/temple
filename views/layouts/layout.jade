@@ -6,29 +6,62 @@ html
 	body#feed
 		//-Sidebar
 		.ui.thin.inverted.vertical.sidebar.menu
-			.ui.dropdown.item
+			a.item
+				i.inverted.circular.red.awesome.download.cloud.icon
+				b Temple
+			a.ui.item(href='/post/manage')
 				i.pin.basic.icon
-				|Posts
-				.menu
-					a.item(href='/manage-posts')
-						i.open.folder.icon
-						|&nbsp;All Posts
-					a.item(href='/new-post')
-						i.add.icon
-						|&nbsp;Add New
-					a.item(href='/tags')
-						i.tags.icon
-						|&nbsp;Tags
-			.ui.dropdown.item
+				| Posts
+			a.ui.item(href='/page/manage')
 				i.docs.basic.icon
 				|Pages
+			a.ui.item(href='/page/manage')
+				i.comment.icon
+				|Comments
+			a.ui.item(href='/page/manage')
+				i.open.folder.icon
+				|Media
+			.ui.dropdown.item
+				i.list.layout.basic.icon
+				|Appearance
 				.menu
-					a.item(href='/manage-pages')
+					a.item(href='')
 						i.text.file.icon
-						|&nbsp;All Pages
-					a.item(href='/new-page')
+						|&nbsp;Themes
+					a.item(href='')
 						i.add.icon
-						|&nbsp;Add New
+						|&nbsp;Widgets
+					a.item(href='')
+						i.add.icon
+						|&nbsp;Menus
+					a.item(href='')
+						i.add.icon
+						|&nbsp;Widgets
+					a.item(href='')
+						i.add.icon
+						|&nbsp;Custom Design
+			.ui.dropdown.item
+				i.settings.icon
+				|Settings
+				.menu
+					a.item(href='')
+						i.text.file.icon
+						|&nbsp;General
+					a.item(href='')
+						i.add.icon
+						|&nbsp;Editor
+					a.item(href='')
+						i.add.icon
+						|&nbsp;Reading
+					a.item(href='')
+						i.add.icon
+						|&nbsp;Discussion
+			.ui.item.red.inverted.segment
+				|Preview
+			.ui.item
+				|Git Push
+			.ui.item 
+				|Shortcuts
 		.ui.celled.grid
 			block content
 		block script

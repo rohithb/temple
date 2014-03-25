@@ -34,7 +34,11 @@ var UserInfo = new Schema({
 	email : {type : String},          
 	is_initialized :{type : Boolean, default : 0},
 	posts : [Post],
-	pages : [Page]
+	pages : [Page],
+	settings : {
+		site_title : String,
+		tag_line : String
+	}
 });
 UserInfo.set('autoIndex', false);   // Change it to
 mongoose.model('UserInfo', UserInfo); 

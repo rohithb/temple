@@ -6,20 +6,20 @@ var mongoose = require('mongoose');
 var UserInfo = mongoose.model('UserInfo');
 var error = require('./error_handler');
 
-exports.managePages = function(req, res){
+exports.manage = function(req, res){
 	var username = req.user.username;
 	UserInfo.findOne({'username' : username}, 'pages', function(err,user){
 		if(err)
 			return error.handle(444,'Could not save the page.','Some database error.', next);
 		var pages = user.pages;
 		var monthName = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-		res.render('manage-posts',{ title: 'Manage Pages', page_title : 'Pages', pages : pages, month : monthName});
+		res.render('manage-pages',{ title: 'Manage Pages', page_title : 'Pages', pages : pages, month : monthName});
 
 	});
 	
 };
 
-exports.pageSaveOrUpdate = function(req, res, next){
+exports.saveOrUpdate = function(req, res, next){
 	// TO-DO :: add client side code to verify the status of the opeation. and display appropriate messages.
 	var id = req.body.id;
 	var title = req.body.title;
@@ -63,7 +63,7 @@ exports.pageSaveOrUpdate = function(req, res, next){
 	
 };
 
-exports.pageLoad = function(req, res, next){
+exports.load = function(req, res, next){
 	var username = req.user.username;
 	var id = req.params.id;
 	UserInfo.findOne({'username' : username, 'pages._id' : id}, {'pages.$' : 1},function(err, user){
@@ -73,7 +73,7 @@ exports.pageLoad = function(req, res, next){
 	});
 };
 
-exports.pagePublish = function(req, res, next){
+exports.publish = function(req, res, next){
 	var username = req.user.username;
 	var id = req.params.id;
 	var action = req.params.publish;   // action = publish or unpublish
@@ -90,7 +90,7 @@ exports.pagePublish = function(req, res, next){
 	
 };
 
-exports.pageSaveAttr = function(req, res, next){
+exports.saveAttr = function(req, res, next){
 	var username = req.user.username;
 	var id = req.query.id;
 	var parent = req.query.parent_id;

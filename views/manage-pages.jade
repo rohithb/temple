@@ -1,0 +1,70 @@
+extends layouts/manage_layout
+block sevenCol
+  .ui.tabular.filter.menu
+    a.active.item(data-tab='published') Published
+    a.item(data-tab='draft') Draft
+  .ui.divided.inbox.selection.list.tab.published(data-tab='published')
+    each page in pages
+      if page.published
+        a.item.pageref(id='#{page._id}')
+          .left.floated.ui.star.rating
+            i.icon
+          .right.floated.date #{month[page.date.getMonth()]+ ' ' + page.date.getDate()+ ', '+page.date.getFullYear()}
+          .description #{page.title}
+  .ui.divided.inbox.selection.list.tab.draft(data-tab='draft')
+   each page in pages
+      if !page.published
+        a.item.pageref(id='#{page._id}')
+          .left.floated.ui.star.rating
+            i.icon
+          .right.floated.date #{month[page.date.getMonth()]+ ' ' + page.date.getDate()+ ', '+page.date.getFullYear()}
+          .description #{page.title}
+  .ui.divider
+  .ui.small.basic.confirm.unsaved.modal
+    .header Unsaved Changes
+    .content
+      .left
+        i.save.icon
+      .right
+        |Are you sure? All unsaved changes will be lost.
+    .actions
+      .ui.button.negative.teal Cancel
+      .ui.button.positive.red Confirm
+  .ui.small.pageAttr.modal
+    .header Page Attributes
+    .content
+      .left
+        i.print.basic.icon
+      .right 
+        .ui.selection.dropdown
+          .ui.label Parent
+          |&nbsp;&nbsp;
+          input(type = 'hidden', id = 'parent' value='no_parent')
+          .default.text No Parent
+          i.dropdown.icon
+          .menu
+            .item(data-value='no_parent') No Parent
+            each page in pages
+              .item(data-value= '#{page._id}') #{page.title}
+        |&nbsp;&nbsp;
+        .ui.input.focus
+          input(type='text', id='order' placeholder='Order')
+        .ui.visible.message
+          p.
+            <b>Parent</b> - You can arrange your pages in hierarchies. For example, you could have an “About” page that has “Life Story” and “My Dog” pages under it.
+            </br><b>Order</b> - Pages are usually ordered alphabetically, but you can choose your own order by entering a number (1 for first, etc.) in this field.
+    .actions
+      .ui.button.negative.teal Cancel
+      .ui.button.positive.red Save
+block nineCol
+    .ui.inverted.dimmer
+      .ui.large.text.loader Loading
+    .ui#editor
+      h1#title.ui.header(contentEditable = true) 
+      .ui.clearing.divider
+      //- a.ui.small.teal.button#save Save
+      //- a.ui.small.teal.button#publish Publish
+      textarea(data-uk-markdownarea="{mode:'tab'}")
+
+block script
+  script(src ='/javascripts/manage_page.js')
