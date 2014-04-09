@@ -18,7 +18,6 @@ var Post = new Schema({
 });
 
 var Page = new Schema({
-	id : {type: Number, unique : true},
 	title : String,
 	content : String,
 	published : Boolean,
@@ -27,7 +26,10 @@ var Page = new Schema({
 	order : {type : Number, default : 0},
 	tags : [Tag]
 });
-
+var Block = new Schema({
+	name : String,
+	content : String
+});
 var UserInfo = new Schema({
 	username : {type : String, unique : true, index :true },   
 	full_name : {type : String},
@@ -38,7 +40,9 @@ var UserInfo = new Schema({
 	settings : {
 		site_title : String,
 		tag_line : String
-	}
+	},
+	page_blocks : [Block],
+	theme : {type : String, default : 'default'}
 });
 UserInfo.set('autoIndex', false);   // Change it to
 mongoose.model('UserInfo', UserInfo); 

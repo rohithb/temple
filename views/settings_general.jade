@@ -1,0 +1,45 @@
+extends layouts/settings_layout
+
+block settings
+	.ui.fluid.form#general
+		.two.fields
+			.field
+				label First Name
+				input(placeholder='First Name', name='firstName', type='text')
+			.field
+				label Last Name
+				input(placeholder='Last Name', name='lastName', type='text')
+		.field
+			label Email
+			input(placeholder='Email', name='email', type='text')
+		.field
+			label Site Title
+			input(placeholder='Site Title', name='siteTitle', type='text')
+		.field
+			label Tag Line
+			input(placeholder='Tag Line', name='tagLine', type='text')
+		.ui.teal.submit.button Save
+
+
+block script
+	script.
+		$(document).ready(function(){
+			$('.ui.sidebar').sidebar('show');
+			$('.submit').on('click',function(){
+				var data = $('#general').find('input').serializeObject();
+				$('.submit').addClass('loading');
+				$.ajax({
+					url : '/settings/general',
+					type: 'POST',
+					data : data,
+					success : function(data){
+						$('.submit').removeClass('loading');
+					},
+					error : function(err){
+						alert('Something went terribly wrong !! Please try again...');
+						$('.submit').removeClass('loading');
+					}
+				});
+			});
+
+		});

@@ -1,7 +1,7 @@
 doctype html
 html
 	head
-	block header
+		block header
 		
 	body#feed
 		//-Sidebar
@@ -37,14 +37,14 @@ html
 					a.item(href='')
 						i.add.icon
 						|&nbsp;Widgets
-					a.item(href='')
+					a.item(href='/settings/layout')
 						i.add.icon
-						|&nbsp;Custom Design
+						|&nbsp;Layout
 			.ui.dropdown.item
 				i.settings.icon
 				|Settings
 				.menu
-					a.item(href='')
+					a.item(href='/settings/general')
 						i.text.file.icon
 						|&nbsp;General
 					a.item(href='')
@@ -56,12 +56,13 @@ html
 					a.item(href='')
 						i.add.icon
 						|&nbsp;Discussion
-			.ui.item.red.inverted.segment
-				|Preview
-			.ui.item
-				|Git Push
-			.ui.item 
-				|Shortcuts
+			.ui.bottom
+				.ui.item.red.inverted.segment
+					|Preview
+				.ui.item
+					|Git Push
+				.ui.item 
+					|Shortcuts
 		.ui.celled.grid
 			block content
 		block script

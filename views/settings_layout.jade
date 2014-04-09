@@ -1,0 +1,45 @@
+extends layouts/settings_layout
+
+block append header
+	link(rel='stylesheet', href='/uikit/codemirror/lib/v4/codemirror.css')
+	link(rel='stylesheet', href='/uikit/codemirror/theme/xq-light.css')
+	script(src='/uikit/codemirror/lib/v4/codemirror.js')
+	script(src='/uikit/codemirror/addon/edit/closebrackets.js')
+	script(src='/uikit/codemirror/addon/edit/matchbrackets.js')
+	script(src='/uikit/codemirror/mode/jade/jade.js')
+
+block settings
+	.ui.green.message.hidden Changes Saved Successfully.
+	textarea#code #{page_layout}
+	br
+	.ui.teal.submit.button Save
+
+
+block script
+	script.
+		$(document).ready(function(){
+			$('.ui.sidebar').sidebar('show');
+			var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+				autoCloseBrackets: true,
+				lineNumbers: true,
+				matchBrackets: true,
+				mode: "jade",
+				theme : 'xq-light'
+			});
+			$('.submit').on('click',function(){
+				var config = editor.doc.getValue();
+				$('.green.message').addClass('hidden');
+				$.ajax({
+					url : '/settings/layout',
+					type: 'POST',
+					data : {'config' : config},
+					success : function(data){
+						$('.green.message').removeClass('hidden');
+					},
+					error : function(err){
+						alert('Something went terribly wrong !! Please try again...');
+						$('.submit').removeClass('loading');
+					}
+				});
+			});
+		});

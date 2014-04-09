@@ -1,0 +1,11 @@
+extends views/layouts/layout
+
+block content
+	.ui.grid
+		.row(style = 'width : "20%"').
+			#{menu}
+		.row
+			.col(style = 'width : "30%"').
+				#{side_bar}
+			.col(style = 'width : "80%"').
+				#{content}

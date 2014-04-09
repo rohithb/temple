@@ -1,6 +1,23 @@
 extends layout
 block header
-	include ../includes/manage_post_head
+	include ../includes/standard_head
+	//-MarkDown Editor
+	link(rel='stylesheet' href='/uikit/css/uikit.css')
+	script(src='/uikit/js/uikit.min.js')
+	//-Codemirror and marked dependencies 
+	link(rel='stylesheet', href='/uikit/codemirror/lib/codemirror.css')
+	script(src='/uikit/codemirror/lib/codemirror.js')
+	script(src='/uikit/codemirror/mode/markdown/markdown.js')
+	script(src='/uikit/codemirror/addon/mode/overlay.js')
+	script(src='/uikit/codemirror/mode/xml/xml.js')
+	script(src='/uikit/codemirror/mode/gfm/gfm.js')
+	script(src='/uikit/marked.js')
+	//- Markdown Area JavaScript and CSS 
+	script(src='/uikit/markdownarea/markdownarea.js')
+	link(rel='stylesheet', href='/uikit/markdownarea/markdownarea.css')
+
+
+	
 
 block content
 	.seven.wide.middle.column

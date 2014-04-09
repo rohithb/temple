@@ -10,6 +10,7 @@ var error = require('./error');
 var user = require('./routes/user');
 var page = require('./routes/page');
 var post = require('./routes/post');
+var preview = require('./routes/preview');
 var settings = require('./routes/settings');
 var http = require('http');
 var path = require('path');
@@ -27,7 +28,7 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(express.cookieParser('your secret here'));
+app.use(express.cookieParser('your secret here')); //change this secret 
 app.use(express.session());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -100,7 +101,10 @@ app.get('/post/save-attribute', loggedIn, post.saveAttr);
 //settings
 app.get('/settings/general', loggedIn, settings.general.get);
 app.post('/settings/general', loggedIn, settings.general.post);
+app.get('/settings/layout', loggedIn, settings.layout.get);
+app.post('/settings/layout', loggedIn, settings.layout.post);
 
+app.get('/preview', loggedIn, preview.page);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

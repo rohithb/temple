@@ -1,0 +1,12 @@
+extends layout
+
+block header
+	include ../includes/standard_head
+
+block content
+	.ui.grid.settings
+		.one.wide.middle.column
+		.twelve.wide.right.column
+			h1 #{page_title}
+			.ui.fluid.form
+				block settings

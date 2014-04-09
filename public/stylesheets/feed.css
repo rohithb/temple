@@ -10,7 +10,7 @@ body {
 
 body {
   font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  background: #FFFFFF;
+  background: #FAFAFA;
   margin: 0px;
   padding: 0px;
   color: #555555;
@@ -40,6 +40,7 @@ body {
 
 #feed .grid {
   height: 100%;
+  width: 100%;
 }
 
 #feed > .grid > .column {
@@ -91,7 +92,14 @@ body {
 .ui.clear.left{
   clear : left;
 }
-
+#feed .ui .fluid .form{
+  font-size: 13pt;
+}
+.ui .bottom{
+  position: absolute;
+  width: inherit;
+  bottom: 3px;                    
+}
 /*******************************
           Responsive
 *******************************/
